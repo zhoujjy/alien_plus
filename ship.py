@@ -13,6 +13,7 @@ class Ship:
         """初始化飞船"""
         # 获取屏幕对象
         self.screen = ai_game.screen
+        self.setting = ai_game.settings
 
         # 获取屏幕的rect对象
         self.screen_rect = ai_game.screen.get_rect()
@@ -24,6 +25,22 @@ class Ship:
         # 将飞船放在屏幕底部中央
         self.rect.midbottom = self.screen_rect.midbottom
 
+        # 飞船移动开关
+        self.move_right = False
+        self.move_left = False
+
+        self.x = float(self.rect.x)
+
+
+
     def blit_ship(self):
         """在指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
+
+    def move(self):
+        """根据移动开关调整飞船位置"""
+        if self.move_right and self.rect.right < self.screen_rect.right:
+            self.x += self.setting.ship_speed
+        if self.move_left and self.rect.left > 0:
+            self.x -= self.setting.ship_speed
+        self.rect.x = self.x
