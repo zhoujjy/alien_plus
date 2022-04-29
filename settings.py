@@ -27,6 +27,7 @@ class Settings:
         '外星人设置'
         self.alien_x_speed = 1 # 定义外星人移动速度
         self.alien_y_speed = 30 # 定义外星人移动速度
+        self.fleet_direction = 1 # 定义外星人移动方向
 
         '游戏节奏'
         self.speedup_scale = 1.1 # 定义游戏速度提升的比例
