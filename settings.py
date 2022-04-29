@@ -10,7 +10,6 @@ class Settings:
 
         '颜色设置'
         self.bg_color = (230,230,230)
-        self.bg_color2 = (60, 60, 60) #子弹颜色
         self.bg_color3 = (230,230,230)
         self.bg_color4 = (0, 255, 0)
 
@@ -21,6 +20,9 @@ class Settings:
         '子弹设置'
         self.bullet_speed = 1 # 定义子弹的速度
         self.bullet_allowed = 10 # 定义允许发射的子弹数量
+        self.bullet_width = 3 # 子弹宽
+        self.bullet_height = 15 # 子弹高
+        self.bullet_color = (60,60,60) # 子弹颜色
 
         '外星人设置'
         self.alien_x_speed = 1 # 定义外星人移动速度
