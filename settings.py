@@ -14,13 +14,13 @@ class Settings:
         self.bg_color4 = (0, 255, 0)
 
         '飞船设置'
-        self.life_num = 3 # 定义生命数量
+        self.ship_limit = 3 # 定义生命数量
         self.ship_speed = 1 # 定义飞船移动速度
 
         '子弹设置'
         self.bullet_speed = 1 # 定义子弹的速度
         self.bullet_allowed = 10 # 定义允许发射的子弹数量
-        self.bullet_width = 3 # 子弹宽
+        self.bullet_width = 600 # 子弹宽
         self.bullet_height = 15 # 子弹高
         self.bullet_color = (60,60,60) # 子弹颜色
 

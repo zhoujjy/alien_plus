@@ -5,13 +5,15 @@
 # @Software: PyCharm
 
 import sys
+from time import sleep
+
 import pygame
 
 from ship import Ship
 from settings import Settings
 from bullet import Bullet
 from alien import Alien
-
+from game_stats import GameStats
 
 class AlienMain:
     """游戏主类"""
@@ -26,6 +28,7 @@ class AlienMain:
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # 全屏
         pygame.display.set_caption("Alien Invasion")
         self.bg_color = self.settings.bg_color
+        self.stats = GameStats(self)
 
         # 创建飞船
         self.ship = Ship(self)
@@ -96,18 +99,56 @@ class AlienMain:
         if event.key == pygame.K_LEFT:
             self.ship.move_left = False
 
+    def ship_hit(self):
+        """"响应飞船被外星人碰到"""
+        if self.stats.ships_left>0:
+            self.stats.ships_left -= 1
+
+            self.aliens.empty()
+            self.bullets.empty()
+
+            self.create_fleet()
+            self.ship.center_ship()
+
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
+
+    def check_bullet_alien_collisions(self):
+        """子弹和外星人碰撞"""
+        # 检查是否碰撞,(碰撞者，被碰撞者，子弹是否消失，外星人是否消失)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        # 当外星人被消灭后创建新的外星人
+        if not self.aliens:
+            self.bullets.empty()
+            self.create_fleet()
+
+    def check_aliens_bottom(self):
+        """"检查是否有外星人到达了屏幕底端"""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                self.ship_hit()
+                break
+
     def update_bullets(self):
         """更新子弹的位置"""
         self.bullets.update()
+
         # 删除已消失的子弹
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+        self.check_bullet_alien_collisions()
 
     def update_aliens(self):
         """更新外星人的位置"""
         self.check_feet_edges()
         self.aliens.update()
+        # 判断是否碰撞
+        if pygame.sprite.spritecollideany(self.ship,self.aliens):
+            self.ship_hit()
+        self.check_aliens_bottom()
 
     def check_feet_edges(self):
         """外星人到达边缘时，改变方向"""
@@ -141,9 +182,12 @@ class AlienMain:
         # 主循环
         while True:
             self.check_events()
-            self.ship.move()
-            self.update_bullets()
-            self.update_aliens()
+
+            if self.stats.game_active:
+                self.ship.move()
+                self.update_bullets()
+                self.update_aliens()
+
             self.update_screen()
 
 
