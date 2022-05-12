@@ -4,13 +4,15 @@
 # @File : ship.py
 # @Software: PyCharm
 import pygame
+from pygame.sprite import Sprite
 
 
-class Ship:
+class Ship(Sprite):
     """飞船类"""
 
     def __init__(self, ai_game):
         """初始化飞船"""
+        super().__init__()
         # 获取屏幕对象
         self.screen = ai_game.screen
         self.setting = ai_game.settings
