@@ -16,6 +16,8 @@ from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from star import Star
+
 
 class AlienMain:
     """游戏主类"""
@@ -42,6 +44,9 @@ class AlienMain:
         # 创建一个用于存储外星人的精灵组
         self.aliens = pygame.sprite.Group()
         self.create_fleet()
+
+        # 创建星星
+        self.stars = Star(self)
 
         # 创建Play按钮
         self.play_button = Button(self, "Play")
@@ -227,11 +232,15 @@ class AlienMain:
         if not self.stats.game_active:
             self.play_button.draw_button()
 
+        # 绘制星星
+        self.stars.draw_stars()
+
         # 更新屏幕
         pygame.display.flip()
 
     def run_game(self):
         """开始游戏"""
+
         # 主循环
         while True:
             self.check_events()

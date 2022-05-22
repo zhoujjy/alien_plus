@@ -9,6 +9,7 @@ from ship import Ship
 
 
 class Scoreboard():
+    """显示得分信息的类"""
     def __init__(self, ai_game):
         self.ai_game = ai_game
         self.screen = ai_game.screen
@@ -25,6 +26,7 @@ class Scoreboard():
         self.prep_ships()
 
     def prep_score(self):
+        # 显示得分
         score_str = str(self.stats.score)
         rounded_score = int(round(self.stats.score, -1))
         score_str = "{:,}".format(rounded_score)
@@ -34,6 +36,7 @@ class Scoreboard():
         self.score_rect.top = 20
 
     def prep_high_score(self):
+        # 显示最高得分
         high_score = int(round(self.stats.high_score, -1))
         high_score_str = "{:,}".format(high_score)
         self.high_score_image = self.font.render(high_score_str, True, self.text_color, self.settings.bg_color)
@@ -42,7 +45,12 @@ class Scoreboard():
         self.high_score_rect.top = self.score_rect.top
 
     def check_high_score(self):
+        # 检查是否诞生了新的最高得分
+        filename = 'high_score.txt'
         if self.stats.score > self.stats.high_score:
+            # 写入文件
+            with open(filename, 'w') as file_object:
+                file_object.write(str(self.stats.score))
             self.stats.high_score = self.stats.score
             self.prep_high_score()
 
