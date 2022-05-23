@@ -8,10 +8,9 @@ class Settings:
     """设置类"""
 
     def __init__(self):
-        '颜色设置'
+
+        # 背景颜色
         self.bg_color = (230, 230, 230)
-        self.bg_color3 = (230, 230, 230)
-        self.bg_color4 = (0, 255, 0)
 
         '飞船设置'
         self.ship_limit = 4  # 定义生命数量

@@ -11,6 +11,7 @@ from ship import Ship
 class Scoreboard():
     """显示得分信息的类"""
     def __init__(self, ai_game):
+        # 初始化信息
         self.ai_game = ai_game
         self.screen = ai_game.screen
         self.screen_rect = self.screen.get_rect()
@@ -48,7 +49,7 @@ class Scoreboard():
         # 检查是否诞生了新的最高得分
         filename = 'high_score.txt'
         if self.stats.score > self.stats.high_score:
-            # 写入文件
+            # 当产生最高分时，将其写入文件
             with open(filename, 'w') as file_object:
                 file_object.write(str(self.stats.score))
             self.stats.high_score = self.stats.score

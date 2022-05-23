@@ -4,7 +4,7 @@
 # @File : game_stats.py
 # @Software: PyCharm
 class GameStats:
-    """游戏统计信息"""
+    """游戏统计信息类"""
 
     def __init__(self, ai_game):
         """初始化统计信息"""

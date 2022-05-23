@@ -24,6 +24,7 @@ class Star:
         self.x = []
         self.y = []
 
+
     def draw_stars(self):
         """绘制星星"""
         # 随机星星坐标

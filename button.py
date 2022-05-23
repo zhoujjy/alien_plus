@@ -7,6 +7,7 @@ import pygame
 
 
 class Button:
+    """ 按钮类 """
     def __init__(self,ai_game,msg):
         """初始化按钮属性"""
         self.screen = ai_game.screen
