@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time: 2022/5/23 10:50
-# @Author : zj
-# @File : test_alien.py
-# @Software: PyCharm
+
 import unittest
 from alien import Alien
 from alien_main import AlienMain

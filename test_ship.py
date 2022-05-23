@@ -1,8 +1,3 @@
-# -*- coding = utf-8 -*-
-# @Time: 2022/5/22 21:59
-# @Author : zj
-# @File : test_ship.py
-# @Software: PyCharm
 
 import unittest
 from ship import Ship
